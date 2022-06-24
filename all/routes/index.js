@@ -10,7 +10,7 @@ router.get("/", function (req, res, next) {
 router.get("/mcqueen", function (req, res, next) {
     res.render("hero", {
         title: "Молния МакКуин",
-        picture: "images/mcqueen",
+        picture: "images/mcqueen.jpg",
         desc: "Красный Roockie Race Car 2006",
     });
 });
@@ -19,7 +19,7 @@ router.get("/mcqueen", function (req, res, next) {
 router.get("/dochudson", function (req, res, next) {
     res.render("hero", {
         title: "Док Хадсон",
-        picture: "images/dochudson",
+        picture: "images/dochudson.jpg",
         desc: "Темно-синий Hudson Hornet 1951",
     });
 });
@@ -28,7 +28,7 @@ router.get("/dochudson", function (req, res, next) {
 router.get("/king", function (req, res, next) {
     res.render("hero", {
         title: "Ченг Кинг",
-        picture: "images/king",
+        picture: "images/king.jpg",
         desc: "Голубой Plymouth Superbird 1970",
     });
 });
@@ -37,7 +37,7 @@ router.get("/king", function (req, res, next) {
 router.get("/chickhicks", function (req, res, next) {
     res.render("hero", {
         title: "Чико Хикс",
-        picture: "images/chickhicks",
+        picture: "images/chickhicks.jpg",
         desc: "Зеленый Shyster Cremlin 1979",
     });
 });
@@ -46,7 +46,7 @@ router.get("/chickhicks", function (req, res, next) {
 router.get("/sally", function (req, res, next) {
     res.render("hero", {
         title: "Салли",
-        picture: "images/sally",
+        picture: "images/sally.jpg",
         desc: "Голубой Porsche 911 Carrera 2002",
     });
 });
