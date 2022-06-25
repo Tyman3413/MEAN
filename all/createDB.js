@@ -1,17 +1,14 @@
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/cars");
-var Hero = require("./models/hero").Hero;
 var async = require("async");
 var data = require("./data.js").data;
 
-// 1. Очистить базу данных cars
-// 2. Вставить 5 героев
-// 3. Закрыть соединение с базой данных
-
-async.series([open, dropDatabase, createHeroes, close], function (err, result) {
-    if (err) throw err;
-    console.log("ok");
-});
+async.series(
+    [open, dropDatabase, requireModels, createHeroes],
+    function (err, result) {
+        mongoose.disconnect();
+    }
+);
 
 function open(callback) {
     mongoose.connection.on("open", callback);
@@ -33,6 +30,14 @@ function createHeroes(callback) {
     );
 }
 
-function close(callback) {
-    mongoose.disconnect(callback);
+function requireModels(callback) {
+    require("./models/hero").Hero;
+
+    async.each(
+        Object.keys(mongoose.models),
+        function (modelName) {
+            mongoose.models[modelName].ensureIndexes(callback);
+        },
+        callback
+    );
 }
