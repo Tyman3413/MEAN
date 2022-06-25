@@ -1,19 +1,13 @@
-var MongoClient = require("mongodb").MongoClient;
-var data = require("./data.js").data;
+var mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost/test");
 
-const uri = "mongodb://localhost:27017/";
-const client = new MongoClient(uri);
-async function run() {
-    try {
-        await client.connect();
-        var database = client.db("cars");
-        database.dropDatabase();
-        database = client.db("cars");
-        const heroes = database.collection("heroes");
-        const result = await heroes.insertMany(data);
-        console.log(`${result.insertedCount} documents were inserted`);
-    } finally {
-        await client.close();
+var Cat = mongoose.model("Cat", { name: String });
+
+var kitty = new Cat({ name: "Пушок" });
+kitty.save(function (err) {
+    if (err) {
+        console.log(err);
+    } else {
+        console.log("Мяу");
     }
-}
-run();
+});
