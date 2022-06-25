@@ -21,6 +21,8 @@ app.use(cookieParser());
 
 /* Это объявление public папки */
 app.use(express.static(path.join(__dirname, "public")));
+/* Объявляем файлы папки bower_components доступными из браузера, то есть публичными */
+app.use(express.static(path.join(__dirname, "bower_components")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
