@@ -1,4 +1,6 @@
-async.series([firstWord, secondWord, thirdWord], function (err, result) {
+const { parallel } = require("async");
+
+parallel.series([firstWord, secondWord, thirdWord], function (err, result) {
     if (err) throw err;
     console.log(result.join(" "));
 });
