@@ -1,15 +1,38 @@
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/test");
+mongoose.connect("mongodb://localhost/cars");
+var Hero = require("./models/hero").Hero;
+var async = require("async");
+var data = require("./data.js").data;
 
-var schema = mongoose.Schema({ name: String });
+// 1. Очистить базу данных cars
+// 2. Вставить 5 героев
+// 3. Закрыть соединение с базой данных
 
-schema.methods.meow = function () {
-    console.log(this.get("name") + " сказал мяу");
-};
-
-var Cat = mongoose.model("Cat", schema);
-
-var kitty = new Cat({ name: "Пушок" });
-kitty.save(function (err) {
-    kitty.meow();
+async.series([open, dropDatabase, createHeroes, close], function (err, result) {
+    if (err) throw err;
+    console.log("ok");
 });
+
+function open(callback) {
+    mongoose.connection.on("open", callback);
+}
+
+function dropDatabase(callback) {
+    var db = mongoose.connection.db;
+    db.dropDatabase(callback);
+}
+
+function createHeroes(callback) {
+    async.each(
+        data,
+        function (heroData, callback) {
+            var hero = new mongoose.models.Hero(heroData);
+            hero.save(callback);
+        },
+        callback
+    );
+}
+
+function close(callback) {
+    mongoose.disconnect(callback);
+}
