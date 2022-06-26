@@ -28,7 +28,7 @@ router.post("/logreg", function (req, res, next) {
         if (err) return next(err);
         if (user) {
             if (user.checkPassword(password)) {
-                req.session.user = user;
+                req.session.user = user._id;
                 res.redirect("/");
             } else {
                 res.render("logreg", {
@@ -40,11 +40,18 @@ router.post("/logreg", function (req, res, next) {
             var user = new User({ username: username, password: password });
             user.save(function (err, user) {
                 if (err) return next(err);
-                req.session.user = user;
+                req.session.user = user._id;
                 res.redirect("/");
             });
         }
     });
+});
+
+/* POST logout. */
+router.post("/logout", function (req, res, next) {
+    req.session.destroy();
+    res.locals.user = null;
+    res.redirect("/");
 });
 
 module.exports = router;
