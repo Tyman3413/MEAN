@@ -9,6 +9,7 @@ router.get("/", function (req, res, next) {
         res.render("index", {
             title: "The Cars",
             menu: menu,
+            counter: req.session.counter,
         });
     });
 });
