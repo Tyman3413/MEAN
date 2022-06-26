@@ -18,22 +18,10 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="/">Главная</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/mcqueen">Молния МакКуин</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/dochudson">Док Хадсон</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/king">Кинг</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/chickhicks">Чико Хикс</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/sally">Салли</a>
-                    </li>
                 </ul>
+                <% menu.forEach(function(hero){ %>
+                <li><a href="/heroes/<%=hero.nick%>"><%=hero.title%></a></li>
+                <% }) %>
             </div>
         </nav>
         <%- body %>
