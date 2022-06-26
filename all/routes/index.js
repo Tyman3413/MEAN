@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var Hero = require("../models/hero").Hero;
 var User = require("./../models/User").User;
+var checkAuth = require("./../middleware/checkAuth.js");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
