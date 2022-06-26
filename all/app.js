@@ -4,7 +4,8 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/sonic");
+mongoose.connect("mongodb://localhost/cars");
+var session = require("express-session");
 
 var heroesRouter = require("./routes/heroes");
 
