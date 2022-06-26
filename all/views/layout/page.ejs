@@ -33,10 +33,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/heroes/sally">Салли</a>
                     </li> -->
+                    <% if(typeof nav=='object' && nav){
+                    nav.forEach(function(item){ %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/heroes/<%=item.nick%>">
+                            <%=item.title%>
+                        </a>
+                    </li>
+                    <% })} %>
                 </ul>
-                <% menu.forEach(function(hero){ %>
-                <li><a href="/heroes/<%=hero.nick%>"><%=hero.title%></a></li>
-                <% }) %>
             </div>
         </nav>
         <%- body %>
