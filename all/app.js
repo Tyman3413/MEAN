@@ -8,7 +8,6 @@ mongoose.connect("mongodb://localhost/cars");
 var session = require("express-session");
 
 var heroesRouter = require("./routes/heroes");
-
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
@@ -25,8 +24,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-
 app.use(express.static(path.join(__dirname, "bower_components")));
+
+var MongoStore = require("connect-mongo");
+app.use(
+    session({
+        secret: "TheCars",
+        cookie: { maxAge: 60 * 1000 },
+        store: MongoStore.create({ mongoUrl: "mongodb://localhost/cars" }),
+    })
+);
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
